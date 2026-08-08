@@ -32,8 +32,11 @@ class JanelaPrincipal(QMainWindow):
        widget_central.setLayout(layout)
        self.setCentralWidget(widget_central)
        
-       #Fazendo a conecxão do botão
+       #Fazendo a conexão do botão
        self.botao.clicked.connect(self.escolher_pasta)
+       
+       #Atualizando a tela de acordo com configurações
+       self.atualizar_tela()
    
    #Quando clicar no botão, o usuário deverá escolher uma pasta    
    def escolher_pasta(self):
@@ -45,7 +48,15 @@ class JanelaPrincipal(QMainWindow):
             print(pasta)
             self.configuracoes.pasta_cupons = pasta
             self.configuracoes.salvar()
-            return pasta
+            
         else:
             print("Pasta não selecionada")
-            return None
+            
+        
+   def atualizar_tela(self):
+       if self.configuracoes.pasta_cupons:
+            pasta = self.configuracoes.pasta_cupons
+            mensagem = f"Pasta dos cupons:\n{pasta}"
+            self.texto.setText(mensagem)
+       else:
+           self.texto.setText("Escolha a pasta dos cupons")
