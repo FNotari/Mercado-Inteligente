@@ -6,13 +6,12 @@ def main():
     configuracoes = Configuracoes()
     
     app = QApplication([])
-    janela = JanelaPrincipal()
+    janela = JanelaPrincipal(configuracoes)
     janela.show()
+    print("Programa iniciado")
+    print(configuracoes.tema)    
     app.exec()
-    
-    print("Progrma iniciado")
-    print(configuracoes.tema)
-    
+        
 if __name__ == "__main__":
         main()
         

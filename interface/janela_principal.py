@@ -1,9 +1,11 @@
-from PySide6.QtWidgets import QMainWindow, QLabel, QPushButton, QVBoxLayout, QWidget
+from PySide6.QtWidgets import QMainWindow, QLabel, QPushButton, QVBoxLayout, QWidget, QFileDialog
 
 class JanelaPrincipal(QMainWindow):
    
-   def __init__(self):
+   def __init__(self, configuracoes):
        super().__init__()
+       
+       self.configuracoes = configuracoes
        
        #Criando a janela com o título
        self.setWindowTitle("Mercado Inteligente")
@@ -30,8 +32,20 @@ class JanelaPrincipal(QMainWindow):
        widget_central.setLayout(layout)
        self.setCentralWidget(widget_central)
        
-       #Fazendo o botão funcionar
+       #Fazendo a conecxão do botão
        self.botao.clicked.connect(self.escolher_pasta)
-       
+   
+   #Quando clicar no botão, o usuário deverá escolher uma pasta    
    def escolher_pasta(self):
         print("Botão clicado")
+        
+        pasta = QFileDialog.getExistingDirectory(self, "Selecionar pasta")
+        
+        if pasta:
+            print(pasta)
+            self.configuracoes.pasta_cupons = pasta
+            self.configuracoes.salvar()
+            return pasta
+        else:
+            print("Pasta não selecionada")
+            return None
