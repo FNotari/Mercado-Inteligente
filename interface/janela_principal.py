@@ -37,6 +37,7 @@ class JanelaPrincipal(QMainWindow):
        
        #Atualizando a tela de acordo com configurações
        self.atualizar_tela()
+       print("Atualizando tela")
    
    #Quando clicar no botão, o usuário deverá escolher uma pasta    
    def escolher_pasta(self):
@@ -48,15 +49,18 @@ class JanelaPrincipal(QMainWindow):
             print(pasta)
             self.configuracoes.pasta_cupons = pasta
             self.configuracoes.salvar()
-            
+            self.atualizar_tela()
+            return pasta
         else:
             print("Pasta não selecionada")
-            
-        
+           
    def atualizar_tela(self):
+       print("Atualizando tela")
+       
        if self.configuracoes.pasta_cupons:
-            pasta = self.configuracoes.pasta_cupons
-            mensagem = f"Pasta dos cupons:\n{pasta}"
-            self.texto.setText(mensagem)
+           print(self.configuracoes.pasta_cupons)
+           pasta = self.configuracoes.pasta_cupons
+           mensagem = f"Pasta dos cupons:\n{pasta}"
+           self.texto.setText(mensagem)
        else:
            self.texto.setText("Escolha a pasta dos cupons")
